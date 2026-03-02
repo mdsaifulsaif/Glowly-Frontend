@@ -76,7 +76,7 @@ body {
   opacity: 0.8;
 }
 
-/* (Product Card) */
+/* =============================(Product Card)====================== */
 
 .product-card {
   width: 312px;
@@ -90,7 +90,6 @@ body {
   width: 312px;
   height: 312px;
   object-fit: cover;
-  border-radius: 8px;
 }
 
 .card-content {
@@ -166,7 +165,7 @@ body {
 
 @media (min-width: 1280px) {
   .sub-container {
-    max-width: 1280px;
+    max-width: 1400px;
   }
 }
 
@@ -355,9 +354,8 @@ body {
   }
 }
 
-/*======================== navber style ============================ */
+/*========================  topsalling product ============================ */
 
-/* সেকশন হেডার ফ্লেক্সবক্স */
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -373,26 +371,23 @@ body {
   font-weight: 500;
 }
 
-/* গ্রিড সেটআপ */
 .product-grid {
   display: grid;
-  /* ৪টি কলাম বড় স্ক্রিনে, প্রতিটি ৩১২px */
+
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-/* ইমেজ হোভার এবং বাটন সেটআপ */
 .image-wrapper {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
 }
 
 .add-to-cart-btn {
   position: absolute;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(100px); /* শুরুতে নিচে থাকবে */
+  transform: translateX(-50%) translateY(100px);
   background: var(--secondary-color);
   color: var(--primary-color);
   padding: 10px 20px;
@@ -408,29 +403,104 @@ body {
 }
 
 .product-card:hover .add-to-cart-btn {
-  transform: translateX(-50%) translateY(0); /* হোভার করলে উপরে উঠে আসবে */
+  transform: translateX(-50%) translateY(0);
 }
 
-/* রেসপনসিভনেস */
 @media (max-width: 1280px) {
   .product-grid {
-    grid-template-columns: repeat(3, 1fr); /* মাঝারি স্ক্রিনে ৩টি */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 1024px) {
   .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* ট্যাবলেটে ২টি */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 640px) {
   .product-grid {
-    grid-template-columns: 1fr; /* মোবাইলে ১টি */
+    grid-template-columns: 1fr;
     justify-items: center;
   }
   .product-card {
     width: 100%;
     max-width: 312px;
+  }
+}
+
+/*===================== category card ======================== */
+
+/* Category Section Background */
+.category-section {
+  background-color: #f8f5f5;
+  padding: 60px 0;
+}
+
+.category-grid {
+  display: grid;
+  /* Automatically wraps items when they hit 280px minimum width */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+/* Card Container - Border Radius Removed */
+.category-card {
+  position: relative;
+  aspect-ratio: 1 / 1.1;
+  border-radius: 0; /* No rounding on corners */
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Image Styling - Border Radius Removed */
+.category-card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0; /* Ensures image corners are sharp */
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.category-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Dark Overlay */
+.category-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.4)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Category Title Style */
+.category-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .category-name {
+    font-size: 18px;
   }
 }
