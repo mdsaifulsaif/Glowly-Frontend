@@ -1,11 +1,15 @@
-// get product function
-async function fetchProducts(containerSelector, limit = null, page = 1) {
+// Fetch products with sorting support
+async function fetchProducts(
+  containerSelector,
+  limit = null,
+  page = 1,
+  sortType = "latest",
+) {
   const productGrid = document.querySelector(containerSelector);
   if (!productGrid) return;
 
   try {
-
-    let url = `${CONFIG.API_BASE_URL}/products?page=${page}`;
+    let url = `${CONFIG.API_BASE_URL}/products?page=${page}&sort=${sortType}`;
     if (limit) url += `&limit=${limit}`;
 
     const response = await fetch(url);
@@ -15,6 +19,7 @@ async function fetchProducts(containerSelector, limit = null, page = 1) {
       const products = result.data;
       productGrid.innerHTML = "";
 
+      // Generate product cards
       products.forEach((product) => {
         const productHTML = `
                     <div class="product-card">
@@ -36,14 +41,16 @@ async function fetchProducts(containerSelector, limit = null, page = 1) {
         productGrid.innerHTML += productHTML;
       });
 
+      // Pagination
       if (!limit && result.totalPages > 1) {
         renderPagination(
           result.totalPages,
           result.currentPage,
           containerSelector,
+          sortType, // Pass sortType
         );
       } else {
-
+        // Remove pagination if a limit is set or only 1 page exists
         const oldPagination = document.querySelector(".pagination-container");
         if (oldPagination) oldPagination.remove();
       }
@@ -54,14 +61,13 @@ async function fetchProducts(containerSelector, limit = null, page = 1) {
   }
 }
 
-
-// pagantion fucntion
-function renderPagination(totalPages, currentPage, selector) {
+// Pagination function
+function renderPagination(totalPages, currentPage, selector, sortType) {
   let paginationHTML = `<div class="pagination-container" style="display:flex; gap:10px; margin-top:20px; justify-content:center;">`;
 
   for (let i = 1; i <= totalPages; i++) {
     paginationHTML += `
-            <button onclick="fetchProducts('${selector}', null, ${i})" 
+            <button onclick="fetchProducts('${selector}', null, ${i}, '${sortType}')" 
                     style="padding: 8px 16px; cursor:pointer; background: ${i === currentPage ? "var(--primary-color)" : "#fff"}; color: ${i === currentPage ? "#fff" : "#000"}; border: 1px solid #ddd;">
                 ${i}
             </button>`;
@@ -74,8 +80,10 @@ function renderPagination(totalPages, currentPage, selector) {
   gridElement.insertAdjacentHTML("afterend", paginationHTML);
 }
 
-fetchProducts(".product-grid", 4);
+fetchProducts("#bestsellers", 4, 2, "random");
+fetchProducts("#new-arrivale", 4, 1, "latest");
 
+// fetchProducts(".product-grid", 4, "latest")
 // category function
 async function fetchCategories() {
   const categoryContainer = document.getElementById("category-container");
@@ -107,16 +115,3 @@ async function fetchCategories() {
   }
 }
 fetchCategories();
-
-
-
-
-
-
-
-
-
-
-
-
-
