@@ -87,7 +87,7 @@ async function fetchProducts(
                     <div class="product-card" onclick="window.location.href='product-details.html?id=${product._id}'" style="cursor: pointer;">
                         <div class="image-wrapper">
                             <img src="${product.thumbnail}" alt="${product.name}" class="card-image" />
-                            <button class="add-to-cart-btn" onclick="event.stopPropagation(); handleAddToCart('${product._id}')">
+                            <button class="add-to-cart-btn" onclick="window.location.href='product-details.html?id=${product._id}'">
                                 <img src="assets/icons/bag.svg" alt="" /> Add to Cart
                             </button>
                         </div>
@@ -144,6 +144,7 @@ function renderPagination(totalPages, currentPage, selector, sortType) {
 fetchProducts("#bestsellers", 4, 2, "random");
 fetchProducts("#new-arrivale", 4, 1, "latest");
 fetchProducts("#shop");
+fetchProducts("#related-products", 4, 1, "random")
 
 // fetchProducts(".product-grid", 4, "latest")
 // category function
@@ -205,4 +206,4 @@ function updateCartCount() {
 }
 
 
-updateCartCount();
+console.log("total card ", updateCartCount())

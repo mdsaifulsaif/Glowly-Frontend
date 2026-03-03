@@ -35,7 +35,7 @@ function setAuthState(userData) {
 //       <div style="display:flex;align-items:center;gap:10px;">
 //         <span>Hi, ${user.name}</span>
 //         <button onclick="logoutUser()"
-//           style="cursor:pointer;background:#ff4757;color:white;border:none;padding:5px 10px;border-radius:4px;">
+//           style="cursor:pointer;background:#F9E4CB;color:white;border:none;padding:5px 10px;border-radius:4px;">
 //           Logout
 //         </button>
 //       </div>
@@ -56,7 +56,7 @@ function updateUI() {
       <div style="display:flex;align-items:center;gap:10px;">
       
         <button id="logout-btn"
-          style="cursor:pointer;background:#ff4757;color:white;border:none;padding:5px 10px;border-radius:4px;">
+          style="cursor:pointer;background:#F9E4CB;color:black;border:none;padding:5px 10px;border-radius:4px;">
           Logout
         </button>
       </div>

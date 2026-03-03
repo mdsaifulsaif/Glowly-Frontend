@@ -254,11 +254,11 @@ body {
   }
 }
 
-/*======================== navber style ============================ */
+/*======================== hero style ============================ */
 
 .hero-section {
   width: 100%;
-  max-width: 1728px;
+ 
   height: 997px;
   background-image: url("../asssts/hero.png");
   background-size: cover;
@@ -704,6 +704,10 @@ body {
   .footer-grid {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+  .copyright-bar{
+    padding-left: 10px;
+   
   }
   .footer-brand,
   .social-links,

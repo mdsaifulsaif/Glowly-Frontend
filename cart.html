@@ -1,11 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>card</title>
-</head>
-<body>
-    
-</body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/card.css" />
+  </head>
+  <body>
+    <!-- nav section.  -->
+    <div id="navbar-placeholder"></div>
+    <div class="sub-container">
+      <h1 class="cart-title">Shopping Cart</h1>
+
+      <div class="cart-wrapper">
+        <div class="cart-items-container" id="cart-items-list"></div>
+
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal-amount">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>$5.99</span>
+          </div>
+          <hr />
+          <div class="summary-row total-row">
+            <span>Total</span>
+            <span id="total-price">$0.00</span>
+          </div>
+
+          <div class="promo-section">
+            <input type="text" placeholder="Promo Code" class="promo-input" />
+            <button class="apply-btn">Apply</button>
+          </div>
+
+          <a href="/checkout.html" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+      </div>
+
+      <a href="shop.html" class="continue-shopping">Continue Shopping</a>
+    </div>
+
+    <!-- related products  -->
+    <section class="global-container">
+      <div class="sub-container">
+        <div class="section-header">
+          <h2 class="section-title">Hand picked for you</h2>
+          <a href="shop.html" class="view-all">View all products <span>&rarr;</span></a>
+        </div>
+
+        <div id="related-products" class="product-grid"></div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/loadLayout.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/card.js"></script>
+  </body>
 </html>

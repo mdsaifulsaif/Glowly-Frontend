@@ -1,0 +1,244 @@
+/* --- 1. General Layout --- */
+.cart-title {
+  font-size: 32px;
+  margin: 40px 0;
+}
+
+.cart-wrapper {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+/* --- 2. Left Section: Cart Items --- */
+.cart-items-container {
+  flex: 2;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 25px 0;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.item-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.item-qty-text {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+/* --- 3. Quantity Button Design --- */
+.qty-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn,
+.qty-input {
+  border: 1.5px solid #a0a0a0;
+  border-radius: 8px;
+  background: #fff;
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.qty-btn {
+  width: 40px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+}
+
+.qty-btn:hover {
+  border-color: #000;
+  background-color: #f9f9f9;
+}
+
+.qty-input {
+  width: 45px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+  cursor: default;
+}
+
+/* --- 4. Pricing and Remove Actions --- */
+.item-price {
+  font-weight: bold;
+  font-size: 18px;
+  position: absolute;
+  right: 0;
+  top: 25px;
+}
+
+.remove-btn {
+  position: absolute;
+  right: 0;
+  bottom: 25px;
+  cursor: pointer;
+  color: #d9534f;
+  background: none;
+  border: none;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+.remove-btn:hover {
+  transform: scale(1.1);
+}
+
+/* --- 5. Right Section: Summary --- */
+.order-summary {
+  flex: 1;
+  background: #fdf7f0;
+  padding: 30px;
+  border-radius: 8px;
+  position: sticky;
+  top: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.total-row {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+
+.promo-section {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.promo-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.apply-btn {
+  padding: 10px 20px;
+  border: 1px solid #333;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.checkout-btn {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.continue-shopping {
+  display: inline-block;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 12px 25px;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px;
+}
+
+/* --- 6. Full Mobile Responsive --- */
+
+@media (max-width: 992px) {
+  .cart-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .order-summary {
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart-title {
+    font-size: 26px;
+    margin: 20px 0;
+  }
+
+  .cart-item {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-bottom: 20px;
+  }
+
+  .item-img {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+  }
+
+  .item-name {
+    font-size: 16px;
+    padding-right: 60px; 
+  }
+
+  .item-price {
+    font-size: 16px;
+    top: 20px;
+  }
+
+  .qty-group {
+    margin-top: 10px;
+  }
+
+  .remove-btn {
+    bottom: 15px;
+  }
+
+  .promo-section {
+    flex-direction: column;
+  }
+
+  .apply-btn {
+    width: 100%;
+  }
+}
