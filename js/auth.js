@@ -54,7 +54,7 @@ function updateUI() {
 
     container.innerHTML = `
       <div style="display:flex;align-items:center;gap:10px;">
-        <span>Hi, ${user.name}</span>
+      
         <button id="logout-btn"
           style="cursor:pointer;background:#ff4757;color:white;border:none;padding:5px 10px;border-radius:4px;">
           Logout

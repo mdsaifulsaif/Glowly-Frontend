@@ -1,0 +1,146 @@
+/* --- 1. Filter Bar Styles --- */
+.filter-section {
+  background-color: #f9e4cb;
+  padding: 15px 0;
+  width: 100%;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Toggle button - Hidden on Desktop */
+.filter-toggle {
+  display: none;
+  background: #333;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.arrow-down {
+  transition: transform 0.3s ease;
+  font-size: 12px;
+}
+
+.filter-links {
+  display: flex;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
+
+.filter-item {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.filter-item.active,
+.filter-item:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.sort-container {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+#sort-select {
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  font-size: 15px;
+  color: #333;
+}
+
+/* --- 2. Responsive Media Queries --- */
+
+/* For Tablets (992px and below) */
+@media (max-width: 992px) {
+  .filter-links {
+    gap: 20px;
+  }
+}
+
+/* For Mobiles (768px and below) */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Show toggle button on mobile */
+  .filter-toggle {
+    display: flex;
+  }
+
+  /* Hide menu by default on mobile */
+  .filter-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  /* Show menu when 'show' class is toggled via JS */
+  .filter-links.show {
+    display: flex;
+  }
+
+  .filter-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: block;
+  }
+
+  .filter-item:last-child {
+    border-bottom: none;
+  }
+
+  .filter-item.active {
+    background-color: #f0f0f0;
+    text-decoration: none;
+  }
+
+  .sort-container {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 15px;
+    margin-top: 5px;
+  }
+}

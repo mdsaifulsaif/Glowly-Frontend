@@ -1,29 +1,36 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Seoul Mirage - Admin Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/dashboard.css" />
   </head>
   <body>
-    <h1>dashboard</h1>
+    <!-- ================= Sidebar ================= -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <a id="glowly" href="/">Glowly</a>
+      </div>
+      <ul class="nav-list">
+        <li><div class="nav-item active" onclick="loadView('overview', this)">Overview</div></li>
+        <li><div class="nav-item" onclick="loadView('add-category', this)">Add Category</div></li>
+        <li><div class="nav-item" onclick="loadView('add-product', this)">Add Product</div></li>
+        <li><div class="nav-item" onclick="loadView('all-products', this)">All Products</div></li>
+       
+      </ul>
+    </div>
 
-    <!-- dashboard content -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const savedUser = localStorage.getItem("user");
+    <!-- ================= Main Content ================= -->
+    <div class="main-content">
+      <div id="dashboard-view" class="view-container"></div>
+    </div>
 
-        if (!savedUser) {
-          window.location.href = "login.html";
-          return;
-        }
-
-        const user = JSON.parse(savedUser);
-
-        if (user.role !== "admin") {
-          window.location.href = "index.html";
-        }
-      });
-    </script>
+    <script src="./js/dashboard.js"></script>
   </body>
 </html>
