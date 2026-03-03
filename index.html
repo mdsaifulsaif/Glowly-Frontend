@@ -14,185 +14,119 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="nav-container">
-      <nav class="navbar">
-        <div class="sub-container nav-wrapper">
-          <div class="nav-left">
-            <a href="/" class="logo">
-              <img src="./asssts/logo.png" alt="logo" />
-            </a>
-
-            <ul class="nav-links">
-              <li>
-                <a href="#">Skincare <span class="arrow">⌄</span></a>
-              </li>
-              <li>
-                <a href="#">Collections <span class="arrow">⌄</span></a>
-              </li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-
-          <div class="nav-right">
-            <a href="#"
-              ><a href=""><img src="./asssts/icons/Icon.png" alt="" /></a
-            ></a>
-            <a href="#"
-              ><a href=""><img src="./asssts/icons/Icon (1).png" alt="" /></a
-            ></a>
-            <a href="#"
-              ><a href=""><img src="./asssts/icons/Icon (2).png" alt="" /></a
-            ></a>
-          </div>
-        </div>
-      </nav>
-    </div>
-
+    <!-- nav section.  -->
+    <div id="navbar-placeholder"></div>
     <!-- hero section  -->
-    <section class="hero-section">
-      <div class="hero-overlay">
-        <div class="container">
-          <div class="sub-container">
-            <div class="hero-content">
-              <h1 class="hero-title">
-                Discover your skin's <br />
-                true potential
-              </h1>
-              <p class="hero-description">
-                Premium skincare that combines innovation with clean, effective
-                ingredients for all skin types.
-              </p>
-              <div class="hero-btns">
-                <a href="#" class="btn-global">Shop Now</a>
-                <a href="#" class="btn-outline">About Us</a>
+    <div id="hideBlock">
+      <section class="hero-section">
+        <div class="hero-overlay">
+          <div class="container">
+            <div class="sub-container">
+              <div class="hero-content">
+                <h1 class="hero-title">
+                  Discover your skin's <br />
+                  true potential
+                </h1>
+                <p class="hero-description">
+                  Premium skincare that combines innovation with clean,
+                  effective ingredients for all skin types.
+                </p>
+                <div class="hero-btns">
+                  <a href="#" class="btn-global">Shop Now</a>
+                  <a href="#" class="btn-outline">About Us</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- bestsellers  -->
-    <section class="global-container">
-      <div class="sub-container">
-        <div class="section-header">
-          <h2 class="section-title">Bestsellers</h2>
-          <a href="#" class="view-all">View all products <span>&rarr;</span></a>
+      </section>
+      <!-- bestsellers  -->
+      <section class="global-container">
+        <div class="sub-container">
+          <div class="section-header">
+            <h2 class="section-title">Bestsellers</h2>
+            <a href="#" class="view-all"
+              >View all products <span>&rarr;</span></a
+            >
+          </div>
+
+          <div id="bestsellers" class="product-grid"></div>
         </div>
+      </section>
+      <!-- category section  -->
+      <section class="global-container category-section">
+        <div class="sub-container">
+          <h2 class="section-title">Shop by Category</h2>
 
-        <div id="bestsellers" class="product-grid"></div>
-      </div>
-    </section>
-    <!-- category section  -->
-    <section class="global-container category-section">
-      <div class="sub-container">
-        <h2 class="section-title">Shop by Category</h2>
-
-        <div class="category-grid" id="category-container">
-          <p>Loading categories...</p>
-        </div>
-      </div>
-    </section>
-    <!-- new Arrivals section  -->
-    <section class="global-container">
-      <div class="sub-container">
-        <div class="section-header">
-          <h2 class="section-title">New Arrivals</h2>
-          <a href="#" class="view-all">View all products <span>&rarr;</span></a>
-        </div>
-
-        <div id="new-arrivale" class="product-grid"></div>
-      </div>
-    </section>
-    <!-- Philosophy section   -->
-    <section class="philosophy-section">
-      <div class="sub-container philosophy-grid">
-        <div class="philosophy-content">
-          <h2 class="section-title">Our Skincare Philosophy</h2>
-          <p class="philosophy-text">
-            Seoul Mirage was born from a deep appreciation for Korean skincare
-            innovation and the belief that effective products should be
-            accessible to everyone.
-          </p>
-          <p class="philosophy-text">
-            We combine time-tested Korean ingredients with modern science to
-            create formulations that deliver visible results. Each product is
-            meticulously crafted to honor the tradition of the multi-step
-            skincare ritual while fitting seamlessly into your daily routine.
-          </p>
-          <a href="#" class="about-btn">About Us</a>
-        </div>
-
-        <div class="philosophy-image">
-          <img src="./asssts/philosophy.png" alt="Philosophy Image" />
-        </div>
-      </div>
-    </section>
-
-    <!--newsletter section  -->
-    <section class="global-container newsletter-section">
-      <div class="sub-container newsletter-content">
-        <h2 class="newsletter-title">Join Our Community</h2>
-        <p class="newsletter-desc">
-          Subscribe to our newsletter for exclusive offers, skincare tips, and
-          new product announcements.
-        </p>
-
-        <form class="newsletter-form">
-          <input
-            type="email"
-            placeholder="Your email address"
-            required
-            class="newsletter-input"
-          />
-          <button type="submit" class="subscribe-btn">Subscribe</button>
-        </form>
-      </div>
-    </section>
-    <!-- footer section  -->
-    <footer class="global-container main-footer">
-      <div class="sub-container footer-grid">
-        <div class="footer-brand">
-          <img src="./asssts/logo.png" alt="Seoul Mirage" class="footer-logo" />
-          <p class="brand-text">
-            Lorem ipsum dolor sit amet consectetur. Scelerisque lectus habitasse
-            adipiscing.
-          </p>
-          <div class="social-links">
-            <a href="#"><img src="./asssts/icons/google.png" alt="Google" /></a>
-            <a href="#"><img src="./asssts/icons/fb.png" alt="Facebook" /></a>
-            <a href="#"
-              ><img src="./asssts/icons/insta.png" alt="Instagram"
-            /></a>
+          <div class="category-grid" id="category-container">
+            <p>Loading categories...</p>
           </div>
         </div>
+      </section>
+      <!-- new Arrivals section  -->
+      <section class="global-container">
+        <div class="sub-container">
+          <div class="section-header">
+            <h2 class="section-title">New Arrivals</h2>
+            <a href="#" class="view-all"
+              >View all products <span>&rarr;</span></a
+            >
+          </div>
 
-        <div class="footer-links">
-          <h3>Shop</h3>
-          <ul>
-            <li><a href="#">All Products</a></li>
-            <li><a href="#">Bestsellers</a></li>
-            <li><a href="#">New Arrivals</a></li>
-          </ul>
+          <div id="new-arrivale" class="product-grid"></div>
         </div>
+      </section>
+      <!-- Philosophy section   -->
+      <section class="philosophy-section">
+        <div class="sub-container philosophy-grid">
+          <div class="philosophy-content">
+            <h2 class="section-title">Our Skincare Philosophy</h2>
+            <p class="philosophy-text">
+              Seoul Mirage was born from a deep appreciation for Korean skincare
+              innovation and the belief that effective products should be
+              accessible to everyone.
+            </p>
+            <p class="philosophy-text">
+              We combine time-tested Korean ingredients with modern science to
+              create formulations that deliver visible results. Each product is
+              meticulously crafted to honor the tradition of the multi-step
+              skincare ritual while fitting seamlessly into your daily routine.
+            </p>
+            <a href="#" class="about-btn">About Us</a>
+          </div>
 
-        <div class="footer-links">
-          <h3>About</h3>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Shipping & Returns</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-          </ul>
+          <div class="philosophy-image">
+            <img src="./asssts/philosophy.png" alt="Philosophy Image" />
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="sub-container copyright-bar">
-        <p>© 2025 Glowly. All rights reserved.</p>
-      </div>
-    </footer>
+      <!--newsletter section  -->
+      <section class="global-container newsletter-section">
+        <div class="sub-container newsletter-content">
+          <h2 class="newsletter-title">Join Our Community</h2>
+          <p class="newsletter-desc">
+            Subscribe to our newsletter for exclusive offers, skincare tips, and
+            new product announcements.
+          </p>
+
+          <form class="newsletter-form">
+            <input
+              type="email"
+              placeholder="Your email address"
+              required
+              class="newsletter-input"
+            />
+            <button type="submit" class="subscribe-btn">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </div>
+    <div id="footer-placeholder"></div>
 
     <script src="./js/config.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/loadLayout.js"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>

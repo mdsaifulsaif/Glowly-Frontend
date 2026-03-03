@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Create Account - Seoul Mirage</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css//login.css" />
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="auth-section">
+      <div class="auth-header">
+        <h1>Create your account</h1>
+        <p>Or <a href="login.html">sign in to your existing account</a></p>
+      </div>
+
+      <div class="auth-card">
+        <form id="register-form">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Min 4 characters"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="Repeat your password"
+              required
+            />
+          </div>
+
+          <div class="form-options">
+            <div class="checkbox-group">
+              <input type="checkbox" id="terms" required />
+              <label for="terms"
+                >I agree to the <a href="#">Terms of Service</a> and
+                <a href="#">Privacy Policy</a></label
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="sign-in-btn">Create Account</button>
+        </form>
+      </div>
+
+      <div class="auth-footer">
+        Already have an account?
+        <a href="login.html" style="font-weight: 700; color: #000">Sign in</a>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/loadLayout.js"></script>
+    <script>
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("fullname").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+          if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+          }
+
+          if (password.length < 4) {
+            alert("Password must be at least 4 characters!");
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              `http://localhost:5001/api/auth/register`,
+              {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                  "Content-Type": "application/json", // এই লাইনটি অবশ্যই লাগবে
+                },
+                body: JSON.stringify({
+                  name,
+                  email,
+                  password,
+                }),
+              },
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              alert(data.message || "Registration failed");
+              return;
+            }
+
+            alert("Registration successful!");
+            window.location.href = "index.html"; // অথবা তোমার হোম পেজের নাম
+          } catch (error) {
+            console.error("Register error:", error);
+            alert("Something went wrong! Check Console.");
+          }
+        });
+    </script>
+  </body>
+</html>
