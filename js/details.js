@@ -144,7 +144,6 @@ function addToCart(productData) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
- 
 
   alert(`${product.name} added to bag!`);
 
@@ -163,3 +162,86 @@ function changeImage(src) {
   document.getElementById("mainView").src = src;
 }
 
+// ======================
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get("id");
+let selectedRating = 0;
+
+
+const stars = document.querySelectorAll("#star-input i");
+stars.forEach((star) => {
+  star.addEventListener("click", () => {
+    selectedRating = star.getAttribute("data-value");
+    stars.forEach((s, index) => {
+      if (index < selectedRating) {
+        s.classList.replace("fa-regular", "fa-solid");
+      } else {
+        s.classList.replace("fa-solid", "fa-regular");
+      }
+    });
+  });
+});
+
+
+document.getElementById("review-submit-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (selectedRating === 0) return alert("Please select a rating!");
+
+  const reviewData = {
+    productId: productId,
+    rating: Number(selectedRating),
+    comment: document.getElementById("review-comment").value,
+  };
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/review/add`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reviewData),
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      alert("Review added!");
+      location.reload();
+    } else {
+      alert(result.message); 
+    }
+  } catch (err) {
+    console.error("Submit failed", err);
+  }
+});
+
+
+async function loadReviews() {
+  const list = document.getElementById("reviews-display-list");
+  try {
+    const res = await fetch(`${API_BASE_URL}/review/${productId}`);
+    const result = await res.json();
+    console.log("rviw data ", result)
+    if (result.success) {
+      document.querySelector(".review-count").innerText = `${result.count} Reviews`;
+      list.innerHTML = result.data.map(review => `
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://ui-avatars.com/api/?name=${review.user.name}&background=random" class="user-img">
+            <div class="user-meta">
+              <div class="review-rating">
+                ${Array(5).fill(0).map((_, i) => `<i class="${i < review.rating ? 'fa-solid' : 'fa-regular'} fa-star"></i>`).join('')}
+              </div>
+              <span class="name">${review.user.name}</span>
+              <span class="date">${new Date(review.createdAt).toLocaleDateString()}</span>
+            </div>
+          </div>
+          <p>${review.comment}</p>
+        </div>
+      `).join('');
+    }
+  } catch (err) { console.error(err); }
+}
+
+document.addEventListener("DOMContentLoaded", loadReviews);

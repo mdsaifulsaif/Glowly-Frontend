@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details - Seoul Mirage</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/details.css" />
   </head>
@@ -15,6 +19,59 @@
         <p>Loading product details...</p>
       </div>
     </div>
+
+    <!-- related products  -->
+    <section class="global-container">
+      <div class="sub-container">
+        <div class="section-header">
+          <h2 class="section-title">Hand picked for you</h2>
+          <a href="shop.html" class="view-all"
+            >View all products <span>&rarr;</span></a
+          >
+        </div>
+
+        <div id="related-products" class="product-grid"></div>
+      </div>
+    </section>
+
+    <!-- review html  -->
+    <section class="reviews-section sub-container">
+      <div class="reviews-wrapper">
+        <div class="review-form-container">
+          <h2 class="section-title">Ratings and Reviews</h2>
+          <div class="overall-rating">
+            <div class="stars" id="avg-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <span class="review-count">0 Reviews</span>
+          </div>
+
+          <form id="review-submit-form">
+            <label>Your Rating</label>
+            <div class="star-rating" id="star-input">
+              <i class="fa-regular fa-star" data-value="1"></i>
+              <i class="fa-regular fa-star" data-value="2"></i>
+              <i class="fa-regular fa-star" data-value="3"></i>
+              <i class="fa-regular fa-star" data-value="4"></i>
+              <i class="fa-regular fa-star" data-value="5"></i>
+            </div>
+            <label>Your Review</label>
+            <textarea
+              id="review-comment"
+              placeholder="Write your comments here..."
+              required
+            ></textarea>
+            <button type="submit" class="write-review-btn">
+              Write a Review
+            </button>
+          </form>
+        </div>
+
+        <div class="reviews-list" id="reviews-display-list"></div>
+      </div>
+    </section>
 
     <div id="footer-placeholder"></div>
     <script src="./js/config.js"></script>
