@@ -1,5 +1,4 @@
-
-const BASE_URL = "http://127.0.0.1:5001/api";
+const BASE_URL = "https://glowly-server.vercel.app/api";
 
 // ================= Auth Guard =================
 document.addEventListener("DOMContentLoaded", () => {
@@ -71,6 +70,29 @@ const views = {
       </div>
     </div>
   `,
+  "all-orders": `
+    <h2>Order Management</h2>
+    <div class="table-controls">
+      <input type="text" id="orderSearch" placeholder="Search by name, email or phone..." oninput="fetchOrders(1)">
+    </div>
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Contact</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="orderList"></tbody>
+      </table>
+    </div>
+    <div id="orderPagination" class="pagination"></div>
+  `,
 };
 
 // ================= Navigation =================
@@ -91,6 +113,7 @@ function loadView(viewName, element) {
     loadCategoryDropdown();
     fetchProducts();
   }
+  if (viewName === "all-orders") fetchOrders();
 }
 
 // ================= Category APIs =================
@@ -239,4 +262,70 @@ function logoutUser() {
     localStorage.removeItem("user");
     window.location.href = "login.html";
   });
+}
+
+// order function
+
+async function fetchOrders(page = 1) {
+  try {
+    const searchInput = document.getElementById("orderSearch");
+    const searchTerm = searchInput ? searchInput.value : "";
+
+    // URL theke comma (,) remove kora hoyeche
+    const url = `https://glowly-server.vercel.app/api/all-orders?page=${page}&limit=10&search=${searchTerm}`;
+
+    const res = await fetch(url, {
+      method: "GET", // Explicitly bole deya bhalo
+      credentials: "include", // Cookie pathanor jonno
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (res.status === 401 || res.status === 403) {
+      console.error("Unauthorized! Logging out...");
+      // localStorage.removeItem("user");
+      // window.location.href = "login.html";
+      return;
+    }
+
+    const result = await res.json();
+
+    if (result.success) {
+      const tbody = document.getElementById("orderList");
+      if (!tbody) return;
+
+      tbody.innerHTML = result.orders
+        .map((order) => {
+          const name =
+            order.firstName || order.customerInfo?.firstName || "N/A";
+          const email = order.email || order.customerInfo?.email || "N/A";
+          const status = order.status || order.orderStatus || "Pending";
+
+          return `
+            <tr>
+              <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+              <td><strong>${name}</strong></td>
+              <td><small>${email}</small></td>
+              <td>${order.cartItems?.length || order.items?.length || 0} Items</td>
+              <td>${order.totalAmount}</td>
+              <td><span class="status-badge ${status.toLowerCase()}">${status}</span></td>
+              <td>
+                <button class="view-btn btn" onclick="viewOrderDetails('${order._id}')">View</button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      renderPagination(
+        "orderPagination",
+        result.pagination.totalPages,
+        result.pagination.currentPage,
+        "fetchOrders",
+      );
+    }
+  } catch (error) {
+    console.error("Fetch Orders Error:", error);
+  }
 }

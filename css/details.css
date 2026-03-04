@@ -233,13 +233,14 @@
 
 .reviews-section {
   padding: 100px 0;
-  background-color: #e8d5bd; /* image এর মতো soft beige */
+  background-color: #F5D2A899; /
 }
 
 .reviews-wrapper {
   display: flex;
   gap: 100px;
   align-items: flex-start;
+  padding: 30px;
 }
 
 /* ================= LEFT SIDE ================= */
@@ -408,7 +409,11 @@
   .reviews-section {
     padding: 70px 0;
   }
+  .reviews-list{
+    width: 100%;
+  }
 }
+
 
 #review-comment {
   width: 100%;

@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://127.0.0.1:5001/api";
+const API_BASE_URL = "https://glowly-server.vercel.app/api";
 
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -164,12 +164,9 @@ function changeImage(src) {
 
 // ======================
 
-
-
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 let selectedRating = 0;
-
 
 const stars = document.querySelectorAll("#star-input i");
 stars.forEach((star) => {
@@ -185,53 +182,62 @@ stars.forEach((star) => {
   });
 });
 
+document
+  .getElementById("review-submit-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (selectedRating === 0) return alert("Please select a rating!");
 
-document.getElementById("review-submit-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  if (selectedRating === 0) return alert("Please select a rating!");
+    const reviewData = {
+      productId: productId,
+      rating: Number(selectedRating),
+      comment: document.getElementById("review-comment").value,
+    };
 
-  const reviewData = {
-    productId: productId,
-    rating: Number(selectedRating),
-    comment: document.getElementById("review-comment").value,
-  };
+    try {
+      const res = await fetch(`${API_BASE_URL}/review/add`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reviewData),
+      });
 
-  try {
-    const res = await fetch(`${API_BASE_URL}/review/add`, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reviewData),
-    });
-
-    const result = await res.json();
-    if (result.success) {
-      alert("Review added!");
-      location.reload();
-    } else {
-      alert(result.message); 
+      const result = await res.json();
+      if (result.success) {
+        alert("Review added!");
+        location.reload();
+      } else {
+        alert(result.message);
+      }
+    } catch (err) {
+      console.error("Submit failed", err);
     }
-  } catch (err) {
-    console.error("Submit failed", err);
-  }
-});
-
+  });
 
 async function loadReviews() {
   const list = document.getElementById("reviews-display-list");
   try {
     const res = await fetch(`${API_BASE_URL}/review/${productId}`);
     const result = await res.json();
-    console.log("rviw data ", result)
+    console.log("rviw data ", result);
     if (result.success) {
-      document.querySelector(".review-count").innerText = `${result.count} Reviews`;
-      list.innerHTML = result.data.map(review => `
+      document.querySelector(".review-count").innerText =
+        `${result.count} Reviews`;
+      list.innerHTML = result.data
+        .map(
+          (review) => `
         <div class="review-card">
           <div class="review-header">
             <img src="https://ui-avatars.com/api/?name=${review.user.name}&background=random" class="user-img">
             <div class="user-meta">
               <div class="review-rating">
-                ${Array(5).fill(0).map((_, i) => `<i class="${i < review.rating ? 'fa-solid' : 'fa-regular'} fa-star"></i>`).join('')}
+                ${Array(5)
+                  .fill(0)
+                  .map(
+                    (_, i) =>
+                      `<i class="${i < review.rating ? "fa-solid" : "fa-regular"} fa-star"></i>`,
+                  )
+                  .join("")}
               </div>
               <span class="name">${review.user.name}</span>
               <span class="date">${new Date(review.createdAt).toLocaleDateString()}</span>
@@ -239,9 +245,13 @@ async function loadReviews() {
           </div>
           <p>${review.comment}</p>
         </div>
-      `).join('');
+      `,
+        )
+        .join("");
     }
-  } catch (err) { console.error(err); }
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", loadReviews);

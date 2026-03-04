@@ -144,7 +144,7 @@ function renderPagination(totalPages, currentPage, selector, sortType) {
 fetchProducts("#bestsellers", 4, 2, "random");
 fetchProducts("#new-arrivale", 4, 1, "latest");
 fetchProducts("#shop");
-fetchProducts("#related-products", 4, 1, "random")
+fetchProducts("#related-products", 4, 1, "random");
 
 // fetchProducts(".product-grid", 4, "latest")
 // category function
@@ -153,7 +153,9 @@ async function fetchCategories() {
   const categoryContainer = document.getElementById("category-container");
 
   try {
-    const response = await fetch(`http://127.0.0.1:5001/api/categories`);
+    const response = await fetch(
+      `https://glowly-server.vercel.app/api/categories`,
+    );
     const result = await response.json();
 
     if (result.success) {
@@ -185,14 +187,12 @@ async function fetchCategories() {
 }
 fetchCategories();
 
-
 function updateCartCount() {
   const cartCountElement = document.getElementById("cart-count");
 
-
   if (!cartCountElement) {
     console.warn("Cart element not found yet, retrying...");
-    setTimeout(updateCartCount, 100); 
+    setTimeout(updateCartCount, 100);
     return;
   }
 
@@ -205,5 +205,4 @@ function updateCartCount() {
   cartCountElement.style.display = totalQty > 0 ? "flex" : "none";
 }
 
-
-console.log("total card ", updateCartCount())
+console.log("total card ", updateCartCount());

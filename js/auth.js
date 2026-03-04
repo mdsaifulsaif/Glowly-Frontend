@@ -74,10 +74,13 @@ function updateUI() {
 // ===============================
 async function checkAuth() {
   try {
-    const response = await fetch("http://127.0.0.1:5001/api/auth/logged-user", {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await fetch(
+      "https://glowly-server.vercel.app/api/auth/logged-user",
+      {
+        method: "GET",
+        credentials: "include",
+      },
+    );
 
     const result = await response.json();
 
@@ -107,7 +110,7 @@ function clearAuth() {
 async function logoutUser() {
   console.log("click logout fucntion");
   try {
-    await fetch("http://127.0.0.1:5001/api/auth/logout", {
+    await fetch("https://glowly-server.vercel.app/api/auth/logout", {
       method: "GET",
       credentials: "include",
     });

@@ -41,17 +41,58 @@ function renderCheckoutSummary() {
   document.getElementById("summary-total").innerText = `$${total.toFixed(2)}`;
 }
 
+// document.addEventListener("DOMContentLoaded", () => {
+
+//   renderCheckoutSummary();
+
+//   const checkoutForm = document.getElementById("checkout-form");
+
+//   if (checkoutForm) {
+//     checkoutForm.addEventListener("submit", (e) => {
+//       e.preventDefault();
+
+//       const formData = {
+//         firstName: checkoutForm.querySelector('input[placeholder="Full name"]')
+//           .value,
+//         lastName: checkoutForm.querySelector('input[placeholder="Last name"]')
+//           .value,
+//         email: checkoutForm.querySelector('input[placeholder="Email"]').value,
+//         phone: checkoutForm.querySelector('input[placeholder="Phone"]').value,
+//         address: checkoutForm.querySelector(
+//           'input[placeholder="Apartment, suite, etc. (optional)"]',
+//         ).value,
+//         city: checkoutForm.querySelector('input[placeholder="City"]').value,
+//         state: checkoutForm.querySelector("select").value,
+//         postalCode: checkoutForm.querySelector(
+//           'input[placeholder="Postal Code"]',
+//         ).value,
+//         country: checkoutForm.querySelectorAll("select")[1].value,
+//         shippingMethod: document.querySelector('input[name="shipping"]:checked')
+//           .value,
+//         cartItems: JSON.parse(localStorage.getItem("cart")) || [],
+//         totalAmount: document.getElementById("summary-total").innerText,
+//       };
+
+//       console.log("--- Checkout Form Data ---");
+//       console.log(formData);
+
+//       alert("Order data captured! Check console for details.");
+
+//       // window.location.href = "payment.html";
+//     });
+//   }
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
-  // সামারি রেন্ডার করার ফাংশন (আগে যেটা দিয়েছিলাম)
   renderCheckoutSummary();
 
   const checkoutForm = document.getElementById("checkout-form");
 
   if (checkoutForm) {
-    checkoutForm.addEventListener("submit", (e) => {
-      e.preventDefault(); // পেজ রিফ্রেশ হওয়া বন্ধ করবে
+    checkoutForm.addEventListener("submit", async (e) => {
+      // async add kora hoyeche
+      e.preventDefault();
 
-      // ফর্মে থাকা সব ডেটা সংগ্রহ করা
       const formData = {
         firstName: checkoutForm.querySelector('input[placeholder="Full name"]')
           .value,
@@ -74,20 +115,45 @@ document.addEventListener("DOMContentLoaded", () => {
         totalAmount: document.getElementById("summary-total").innerText,
       };
 
-      // কনসোলে ডেটা দেখানো
-      console.log("--- Checkout Form Data ---");
-      console.log(formData);
+      try {
+        // API Call
+        const response = await fetch(
+          "https://glowly-server.vercel.app/api/order-create",
+          
+          {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          },
+        );
 
-      // আপনি চাইলে এখান থেকে পরবর্তী ধাপে যেতে পারেন
-      alert("Order data captured! Check console for details.");
+        const result = await response.json();
 
-      // উদাহরণ: পেমেন্ট পেজে পাঠানো
-      // window.location.href = "payment.html";
+        if (response.ok) {
+          alert("Order placed successfully!");
+          console.log("Success:", result);
+
+          // Order success hole cart clear kore deya bhalo
+          localStorage.removeItem("cart");
+
+          // Redirect to payment or success page
+          // window.location.href = "payment.html";
+        } else {
+          alert(
+            "Failed to place order: " + (result.message || "Unknown error"),
+          );
+        }
+      } catch (error) {
+        console.error("Error sending order:", error);
+        alert("Something went wrong. Please try again later.");
+      }
     });
   }
 });
 
-// শিপিং মেথড পরিবর্তন হলে সামারি আপডেট করার লজিক
 document.querySelectorAll('input[name="shipping"]').forEach((radio) => {
   radio.addEventListener("change", renderCheckoutSummary);
 });
